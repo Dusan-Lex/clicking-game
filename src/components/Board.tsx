@@ -16,7 +16,7 @@ const Board: FC = () => {
   const [clickedFields, setClickedFields] = useState<Field[]>([]);
   const [possibleFields, setPossibleFields] = useState<Field[]>([]);
   const [generatedFields, setGeneratedFields] = useState<Field[]>([]);
-  const [level, setLevel] = useState<number>(2);
+  const [level, setLevel] = useState<number>(1);
   const [modal, setModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,7 +29,11 @@ const Board: FC = () => {
 
   useEffect(() => {
     if (clickedFields.length !== 0 && possibleFields.length === 0) {
-      setModal(true);
+      // setModal(true);
+      setLevel(level + 1);
+      setClickedFields([]);
+      setPossibleFields([]);
+      setGeneratedFields([]);
     }
   }, [possibleFields]);
 
