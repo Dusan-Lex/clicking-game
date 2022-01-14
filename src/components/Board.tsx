@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { calculatePossibleFields } from "../utils/calculatePossibleFields";
-import { calculateRandomFields } from "../utils/calculateRandomFields";
+import { generateRandomFields } from "../utils/generateRandomFields";
 import { isField } from "../utils/isField";
 import styles from "./Board.module.scss";
 import BoardField from "./BoardField";
+import Modal from "./Modal";
 
 export interface Field {
   x: number;
@@ -11,55 +12,68 @@ export interface Field {
 }
 
 const Board: FC = () => {
+  console.log("render board");
   const [clickedFields, setClickedFields] = useState<Field[]>([]);
   const [possibleFields, setPossibleFields] = useState<Field[]>([]);
-  // const [occupiedFields, setOccupiedFields] = useState<number[]>([]);
-  const [desiredFields, setDesiredFields] = useState<Field[]>([]);
-  const [level, setLevel] = useState<number>(1);
-
-  const lastClickedField = clickedFields[clickedFields.length - 1];
+  const [generatedFields, setGeneratedFields] = useState<Field[]>([]);
+  const [level, setLevel] = useState<number>(2);
+  const [modal, setModal] = useState<boolean>(false);
 
   useEffect(() => {
-    lastClickedField &&
-      setPossibleFields(
-        calculatePossibleFields(lastClickedField, clickedFields)
-      );
-  }, [lastClickedField]);
+    setPossibleFields(
+      calculatePossibleFields(clickedFields).filter((x) =>
+        isField(generatedFields, x)
+      )
+    );
+  }, [clickedFields, generatedFields]);
 
   useEffect(() => {
-    lastClickedField &&
-      setDesiredFields(calculateRandomFields(lastClickedField, level));
-  }, [level]);
+    if (clickedFields.length !== 0 && possibleFields.length === 0) {
+      setModal(true);
+    }
+  }, [possibleFields]);
 
   const onClickHandler = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     field: Field
   ) => {
+    console.log("onClick");
     e.stopPropagation();
-
-    if (
-      isField(possibleFields, field) ||
-      JSON.stringify(possibleFields) === JSON.stringify([])
-    ) {
+    if (clickedFields.length === 0) {
+      setClickedFields((fields) => [...fields, field]);
+      setGeneratedFields(generateRandomFields(field, level));
+    }
+    if (isField(possibleFields, field)) {
       setClickedFields((fields) => [...fields, field]);
     }
   };
   return (
-    <div className={styles.board}>
-      {Array.from(Array(100).keys()).map((el) => {
-        const field = { x: Math.floor(el / 10), y: el % 10 };
-        return (
-          <BoardField
-            key={el}
-            field={field}
-            isClicked={isField(clickedFields, field)}
-            isPossible={isField(possibleFields, field)}
-            isDesired={isField(desiredFields, field)}
-            onClick={(e) => onClickHandler(e, field)}
-          />
-        );
-      })}
-    </div>
+    <>
+      {modal && (
+        <Modal
+          onHideCart={() => {
+            setModal(false);
+          }}
+        >
+          <h1>HKJHKJHKJ</h1>
+        </Modal>
+      )}
+      <div className={styles.board}>
+        {Array.from(Array(100).keys()).map((el) => {
+          const field = { x: Math.floor(el / 10), y: el % 10 };
+          return (
+            <BoardField
+              key={el}
+              field={field}
+              isClicked={isField(clickedFields, field)}
+              isPossible={isField(possibleFields, field)}
+              isGenerated={isField(generatedFields, field)}
+              onClick={(e) => onClickHandler(e, field)}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
 

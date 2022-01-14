@@ -5,7 +5,7 @@ export interface BoardFieldProps {
   field: Field;
   isClicked: boolean;
   isPossible: boolean;
-  isDesired: boolean;
+  isGenerated: boolean;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -13,7 +13,7 @@ const BoardField = ({
   field,
   isClicked,
   isPossible,
-  isDesired,
+  isGenerated,
   onClick,
 }: BoardFieldProps) => {
   return (
@@ -22,15 +22,13 @@ const BoardField = ({
         styles.board_field +
         ` ${isClicked ? styles.clicked : ""}` +
         ` ${isPossible ? styles.possible : ""}` +
-        ` ${isDesired ? styles.desired : ""}`
+        ` ${isGenerated ? styles.generated : ""}`
       }
       onClick={onClick}
     >
-      <div>
-        {field.x} , {field.y}
-      </div>
+      <div></div>
     </div>
   );
 };
 
-export default React.memo(BoardField);
+export default BoardField;
