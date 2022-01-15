@@ -3,6 +3,10 @@ import { Field } from "./types";
 export const GENERATE_LEVEL = "GENERATE_LEVEL";
 export const GENERATE_POSSIBLE_FIELDS = "GENERATE_POSSIBLE_FIELDS";
 export const START_LEVEL = "START_LEVEL";
+export const SET_TIMER = "SET_TIMER";
+export const ADD_TIMESCORE = "ADD_TIMESCORE";
+
+export const ADD_PLAYER = "ADD_PLAYER";
 
 export type ActionTypes =
   | {
@@ -16,6 +20,18 @@ export type ActionTypes =
   | {
       type: typeof START_LEVEL;
       payload: { level: number; lives: number };
+    }
+  | {
+      type: typeof SET_TIMER;
+      payload: { timer: number };
+    }
+  | {
+      type: typeof ADD_TIMESCORE;
+      payload: { name: string; level: number };
+    }
+  | {
+      type: typeof ADD_PLAYER;
+      payload: string;
     };
 
 export const generateLevel = (field: Field, level: number): ActionTypes => ({
@@ -31,4 +47,19 @@ export const generatePossibleFields = (field: Field): ActionTypes => ({
 export const startLevel = (level: number, lives: number): ActionTypes => ({
   type: START_LEVEL,
   payload: { level: level, lives: lives },
+});
+
+export const setTimer = (timer: number): ActionTypes => ({
+  type: SET_TIMER,
+  payload: { timer: timer },
+});
+
+export const addTimescore = (name: string, level: number): ActionTypes => ({
+  type: ADD_TIMESCORE,
+  payload: { name: name, level: level },
+});
+
+export const addPlayer = (name: string): ActionTypes => ({
+  type: ADD_PLAYER,
+  payload: name,
 });

@@ -12,14 +12,29 @@
 }
 
 .board {
+  position: relative;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
+
   grid-gap: 2px;
   width: 684px;
   height: 684px;
   background-color: rgb(197, 179, 179);
+  .bottom {
+    margin-left: 1rem;
+    padding: 0.5rem 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    div {
+      width: 6rem;
+    }
+  }
 }
+
 @media only screen and (max-width: 1400px) {
   .board {
     width: calc(50vw - 1rem);
@@ -30,6 +45,13 @@
   .board {
     width: calc(100vw - 2rem);
     height: calc(100vw - 2rem);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .board .bottom div {
+    font-size: 12px;
+    font-weight: 500;
   }
 }
 
@@ -50,6 +72,6 @@
     width: calc(100vw - 2rem);
     height: calc(100vw - 2rem);
     margin-left: 0rem;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
   }
 }

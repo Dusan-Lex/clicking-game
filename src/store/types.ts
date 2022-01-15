@@ -3,6 +3,13 @@ export interface Field {
   y: number;
 }
 
+export interface PlayerStats {
+  [key: string]: number[];
+}
+
+export interface PlayersStats {
+  [key: string]: PlayerStats;
+}
 export interface Store {
   clickedFields: Field[];
   possibleFields: Field[];
@@ -10,4 +17,6 @@ export interface Store {
   level: number;
   lives: number;
   timer: number;
+  playerName: string;
+  allStats: PlayersStats;
 }
