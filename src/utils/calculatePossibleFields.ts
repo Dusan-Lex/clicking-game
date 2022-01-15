@@ -1,4 +1,4 @@
-import { Field } from "../components/Board";
+import { Field } from "../store/types";
 import { isField } from "./isField";
 
 export function calculatePossibleFields(fields: Field[]): Field[] {

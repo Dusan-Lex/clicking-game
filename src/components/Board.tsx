@@ -1,85 +1,74 @@
 import { FC, useEffect, useState } from "react";
-import { calculatePossibleFields } from "../utils/calculatePossibleFields";
-import { generateRandomFields } from "../utils/generateRandomFields";
 import { isField } from "../utils/isField";
 import styles from "./Board.module.scss";
 import BoardField from "./BoardField";
 import Modal from "./Modal";
 import Timer from "./Timer";
 
-export interface Field {
-  x: number;
-  y: number;
-}
+import { useSelector, useDispatch } from "react-redux";
+import { Field, Store } from "../store/types";
+import {
+  generateLevel,
+  generatePossibleFields,
+  startLevel,
+} from "../store/actions";
 
 const Board: FC = () => {
-  console.log("render board");
-  const [clickedFields, setClickedFields] = useState<Field[]>([]);
-  const [possibleFields, setPossibleFields] = useState<Field[]>([]);
-  const [generatedFields, setGeneratedFields] = useState<Field[]>([]);
-  const [level, setLevel] = useState<number>(1);
-  const [stopTimer, setStopTimer] = useState<boolean>(true);
-  const [lives, setLives] = useState<number>(0);
-  const [modal, setModal] = useState<boolean>(false);
+  const generatedFields = useSelector((state: Store) => state.generatedFields);
+  const clickedFields = useSelector((state: Store) => state.clickedFields);
+  const possibleFields = useSelector((state: Store) => state.possibleFields);
+  const level = useSelector((state: Store) => state.level);
+  const lives = useSelector((state: Store) => state.lives);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setPossibleFields(
-      calculatePossibleFields(clickedFields).filter((x) =>
-        isField(generatedFields, x)
-      )
-    );
-  }, [clickedFields, generatedFields]);
+  const [stopTimer, setStopTimer] = useState<boolean>(true);
+  // const [modal, setModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (clickedFields.length !== 0 && possibleFields.length === 0) {
       setStopTimer(true);
       if (clickedFields.length === level + 1) {
-        // pozovi modal i ako je odgovor yes setuj dole navedeno
-        setLevel(level + 1);
-        setLives(lives + 1);
+        dispatch(startLevel(level + 1, lives + 1));
       } else {
-        setLives(lives - (level + 1 - clickedFields.length));
+        const remainingLives = lives - (level + 1 - clickedFields.length);
+        if (remainingLives > 0) {
+          dispatch(startLevel(level, remainingLives));
+        } else {
+          dispatch(startLevel(1, 0));
+        }
       }
-      setClickedFields([]);
-      setPossibleFields([]);
-      setGeneratedFields([]);
     }
-  }, [possibleFields]);
+  }, [possibleFields, level, dispatch, lives, clickedFields.length]);
 
-  const onClickHandler = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    field: Field
-  ) => {
-    e.stopPropagation();
-
+  const onClickHandler = (field: Field) => {
     if (clickedFields.length === 0) {
       setStopTimer(false);
-      setClickedFields((fields) => [...fields, field]);
-      setGeneratedFields(generateRandomFields(field, level));
-    }
-    if (isField(possibleFields, field)) {
-      setClickedFields((fields) => [...fields, field]);
+      dispatch(generateLevel(field, level));
+      dispatch(generatePossibleFields(field));
+    } else {
+      if (isField(possibleFields, field)) {
+        dispatch(generatePossibleFields(field));
+      }
     }
   };
   return (
     <div className={styles.container}>
-      {modal && (
+      {/* {modal && (
         <Modal onHideCart={() => {}}>
           <h3>You have completed level: {level}</h3>
           <p>Do you want to play next level?</p>
         </Modal>
-      )}
+      )} */}
       <div className={styles.board}>
         {Array.from(Array(100).keys()).map((el) => {
           const field = { x: Math.floor(el / 10), y: el % 10 };
           return (
             <BoardField
               key={el}
-              field={field}
               isClicked={isField(clickedFields, field)}
               isPossible={isField(possibleFields, field)}
               isGenerated={isField(generatedFields, field)}
-              onClick={(e) => onClickHandler(e, field)}
+              onClick={() => onClickHandler(field)}
             />
           );
         })}

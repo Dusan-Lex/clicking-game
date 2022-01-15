@@ -1,5 +1,6 @@
 //level builder algorithm
-import { Field } from "../components/Board";
+
+import { Field } from "../store/types";
 import { calculatePossibleFields } from "./calculatePossibleFields";
 
 export function generateRandomFields(

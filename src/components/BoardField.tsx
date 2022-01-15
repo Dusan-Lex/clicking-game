@@ -1,21 +1,19 @@
-import React from "react";
-import { Field } from "./Board";
+import { FC } from "react";
 import styles from "./BoardField.module.scss";
+
 export interface BoardFieldProps {
-  field: Field;
   isClicked: boolean;
   isPossible: boolean;
   isGenerated: boolean;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const BoardField = ({
-  field,
+const BoardField: FC<BoardFieldProps> = ({
   isClicked,
   isPossible,
   isGenerated,
   onClick,
-}: BoardFieldProps) => {
+}) => {
   return (
     <div
       className={
