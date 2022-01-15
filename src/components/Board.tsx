@@ -5,6 +5,7 @@ import { isField } from "../utils/isField";
 import styles from "./Board.module.scss";
 import BoardField from "./BoardField";
 import Modal from "./Modal";
+import Timer from "./Timer";
 
 export interface Field {
   x: number;
@@ -17,6 +18,8 @@ const Board: FC = () => {
   const [possibleFields, setPossibleFields] = useState<Field[]>([]);
   const [generatedFields, setGeneratedFields] = useState<Field[]>([]);
   const [level, setLevel] = useState<number>(1);
+  const [stopTimer, setStopTimer] = useState<boolean>(true);
+  const [lives, setLives] = useState<number>(0);
   const [modal, setModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,8 +32,14 @@ const Board: FC = () => {
 
   useEffect(() => {
     if (clickedFields.length !== 0 && possibleFields.length === 0) {
-      // setModal(true);
-      setLevel(level + 1);
+      setStopTimer(true);
+      if (clickedFields.length === level + 1) {
+        // pozovi modal i ako je odgovor yes setuj dole navedeno
+        setLevel(level + 1);
+        setLives(lives + 1);
+      } else {
+        setLives(lives - (level + 1 - clickedFields.length));
+      }
       setClickedFields([]);
       setPossibleFields([]);
       setGeneratedFields([]);
@@ -41,9 +50,10 @@ const Board: FC = () => {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     field: Field
   ) => {
-    console.log("onClick");
     e.stopPropagation();
+
     if (clickedFields.length === 0) {
+      setStopTimer(false);
       setClickedFields((fields) => [...fields, field]);
       setGeneratedFields(generateRandomFields(field, level));
     }
@@ -52,14 +62,11 @@ const Board: FC = () => {
     }
   };
   return (
-    <>
+    <div className={styles.container}>
       {modal && (
-        <Modal
-          onHideCart={() => {
-            setModal(false);
-          }}
-        >
-          <h1>HKJHKJHKJ</h1>
+        <Modal onHideCart={() => {}}>
+          <h3>You have completed level: {level}</h3>
+          <p>Do you want to play next level?</p>
         </Modal>
       )}
       <div className={styles.board}>
@@ -77,7 +84,14 @@ const Board: FC = () => {
           );
         })}
       </div>
-    </>
+      <div className={styles.gamestats}>
+        <div>Level: {level}</div>
+        <Timer stopTimer={stopTimer} />
+        <div>Clicked: {clickedFields.length}</div>
+        <div>Unclicked: {level + 1 - clickedFields.length}</div>
+        <div>Lives: {lives}</div>
+      </div>
+    </div>
   );
 };
 

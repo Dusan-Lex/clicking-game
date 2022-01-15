@@ -2,12 +2,8 @@ import React, { ReactNode } from "react";
 import ReactDOM from "react-dom";
 import classes from "./Modal.module.scss";
 
-export interface BackdropProps {
-  onClick: React.MouseEventHandler<HTMLDivElement>;
-}
-
-const Backdrop = ({ onClick }: BackdropProps) => {
-  return <div className={classes.backdrop} onClick={onClick}></div>;
+const Backdrop = () => {
+  return <div className={classes.backdrop}></div>;
 };
 
 export interface ModalOverlayProps {
@@ -31,7 +27,7 @@ const Modal = ({ children, onHideCart }: ModalProps) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onClick={onHideCart} />,
+        <Backdrop />,
         document.querySelector("#overlays") as HTMLElement
       )}
       {ReactDOM.createPortal(

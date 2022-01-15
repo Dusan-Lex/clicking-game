@@ -1,3 +1,4 @@
+//level builder algorithm
 import { Field } from "../components/Board";
 import { calculatePossibleFields } from "./calculatePossibleFields";
 

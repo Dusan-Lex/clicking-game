@@ -1,19 +1,7 @@
 .App {
-  text-align: center;
   font-family: "Poppins", sans-serif;
-
   h1 {
-    color: blue;
-  }
-  .container {
-    display: flex;
-    max-width: 1400px;
-    margin: auto;
-    padding: 0 1rem;
-  }
-}
-@media only screen and (max-width: 900px) {
-  .App .container {
-    flex-direction: column;
+    text-align: center;
+    margin: 1rem;
   }
 }

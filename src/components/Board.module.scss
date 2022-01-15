@@ -1,3 +1,16 @@
+.container {
+  display: flex;
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
 .board {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
@@ -17,5 +30,26 @@
   .board {
     width: calc(100vw - 2rem);
     height: calc(100vw - 2rem);
+  }
+}
+
+.gamestats {
+  margin-left: 1rem;
+  padding: 1rem;
+  width: 684px;
+  background-color: rgba(128, 128, 128, 0.2);
+}
+@media only screen and (max-width: 1400px) {
+  .gamestats {
+    width: calc(50vw - 1rem);
+    height: calc(50vw - 1rem);
+  }
+}
+@media only screen and (max-width: 900px) {
+  .gamestats {
+    width: calc(100vw - 2rem);
+    height: calc(100vw - 2rem);
+    margin-left: 0rem;
+    margin-top: 1rem;
   }
 }
