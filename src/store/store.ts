@@ -6,6 +6,7 @@ import {
   ActionTypes,
   ADD_PLAYER,
   ADD_TIMESCORE,
+  CHANGE_PLAYER,
   GENERATE_LEVEL,
   GENERATE_POSSIBLE_FIELDS,
   SET_TIMER,
@@ -24,7 +25,9 @@ export function gameReducer(
     lives: 0,
     timer: 0,
     playerName: "Dusan",
-    allStats: {},
+    allStats: {
+      Dusan: { 1: [3, 5], 2: [6] },
+    },
   },
   action: ActionTypes
 ) {
@@ -68,10 +71,8 @@ export function gameReducer(
           ...state.allStats,
           [action.payload.name]: {
             ...state.allStats[action.payload.name],
-            [`level${action.payload.level}`]: [
-              ...state.allStats[action.payload.name][
-                `level${action.payload.level}`
-              ],
+            [action.payload.level]: [
+              ...state.allStats[action.payload.name][action.payload.level],
               state.timer,
             ],
           },
@@ -91,6 +92,17 @@ export function gameReducer(
           ...state.allStats,
           [action.payload]: generateInitialLevelsScores(),
         },
+      };
+    case CHANGE_PLAYER:
+      return {
+        ...state,
+        playerName: action.payload.name,
+        level: action.payload.level,
+        clickedFields: [],
+        possibleFields: [],
+        generatedFields: [],
+        lives: 0,
+        timer: 0,
       };
     default:
       return state;

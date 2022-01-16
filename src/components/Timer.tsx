@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTimescore, setTimer, startLevel } from "../store/actions";
+import { setTimer } from "../store/actions";
 import { Store } from "../store/types";
 
 export interface TimerProps {
@@ -19,7 +19,7 @@ const Timer = ({ startCount }: TimerProps) => {
       dispatch(setTimer(0));
     }
     return () => clearInterval(interval);
-  }, [timer, startCount]);
+  }, [timer, startCount, dispatch]);
 
   return <div>Timer: {timer} s</div>;
 };

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { isField } from "../utils/isField";
 import styles from "./Board.module.scss";
 import BoardField from "./BoardField";
-// import Modal from "./Modal";
+import Modal from "./Modal/Modal";
 import Timer from "./Timer";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +13,8 @@ import {
   generatePossibleFields,
   startLevel,
 } from "../store/actions";
-import ChoosePlayer from "./ChoosePlayer";
+import ChoosePlayer from "./Modal/ChoosePlayer";
+import ChooseLevel from "./Modal/ChooseLevel";
 
 const Board: FC = () => {
   const generatedFields = useSelector((state: Store) => state.generatedFields);
@@ -26,7 +27,7 @@ const Board: FC = () => {
 
   const [startCount, setStartCount] = useState<boolean>(false);
 
-  // const [modal, setModal] = useState<boolean>(false);
+  const [modal, setModal] = useState<string>("choose_player");
 
   useEffect(() => {
     if (clickedFields.length !== 0 && possibleFields.length === 0) {
@@ -65,12 +66,12 @@ const Board: FC = () => {
   };
   return (
     <div className={styles.container}>
-      {/* {modal && (
-        <Modal onHideCart={() => {}}>
-          <h3>You have completed level: {level}</h3>
-          <p>Do you want to play next level?</p>
+      {modal && (
+        <Modal>
+          {modal === "choose_player" && <ChoosePlayer setModal={setModal} />}
+          {modal === "choose_level" && <ChooseLevel setModal={setModal} />}
         </Modal>
-      )} */}
+      )}
       <div className={styles.board}>
         {Array.from(Array(100).keys()).map((el) => {
           const field = { x: Math.floor(el / 10), y: el % 10 };
@@ -93,8 +94,6 @@ const Board: FC = () => {
       </div>
       <div className={styles.gamestats}>
         <div>Player name: {playerName}</div>
-
-        <ChoosePlayer />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ export const SET_TIMER = "SET_TIMER";
 export const ADD_TIMESCORE = "ADD_TIMESCORE";
 
 export const ADD_PLAYER = "ADD_PLAYER";
+export const CHANGE_PLAYER = "CHANGE_PLAYER";
 
 export type ActionTypes =
   | {
@@ -32,6 +33,10 @@ export type ActionTypes =
   | {
       type: typeof ADD_PLAYER;
       payload: string;
+    }
+  | {
+      type: typeof CHANGE_PLAYER;
+      payload: { name: string; level: number };
     };
 
 export const generateLevel = (field: Field, level: number): ActionTypes => ({
@@ -62,4 +67,9 @@ export const addTimescore = (name: string, level: number): ActionTypes => ({
 export const addPlayer = (name: string): ActionTypes => ({
   type: ADD_PLAYER,
   payload: name,
+});
+
+export const changePlayer = (name: string, level: number): ActionTypes => ({
+  type: CHANGE_PLAYER,
+  payload: { name: name, level: level },
 });

@@ -20,10 +20,9 @@ const ModalOverlay = ({ children }: ModalOverlayProps) => {
 
 export interface ModalProps {
   children: ReactNode;
-  onHideCart: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const Modal = ({ children, onHideCart }: ModalProps) => {
+const Modal = ({ children }: ModalProps) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
