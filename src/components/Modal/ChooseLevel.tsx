@@ -3,18 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLevel } from "../../store/actions";
 
 import { Store } from "../../store/types";
+import { startingLevel } from "../../game.config";
 
 const ChooseLevel = ({
   setModal,
+  lives,
 }: {
   setModal: React.Dispatch<React.SetStateAction<string>>;
+  lives: number;
 }) => {
-  const playerLevels = useSelector((state: Store) => {
-    console.log(state.playerName, state.allStats);
+  let playerLevels = useSelector((state: Store) => {
     const obj = state.allStats[state.playerName];
-
-    return Object.keys(obj).filter((el) => obj[el].length !== 0);
+    return Object.keys(obj)
+      .filter((level) => obj[level].length !== 0)
+      .map((x) => parseInt(x));
   });
+
+  if (playerLevels.length !== 0) {
+    playerLevels.push(playerLevels[playerLevels.length - 1] + 1);
+  } else {
+    playerLevels.push(startingLevel);
+  }
   const dispatch = useDispatch();
   return (
     <div className={styles.choose}>
@@ -24,7 +33,7 @@ const ChooseLevel = ({
           <li
             key={x}
             onClick={() => {
-              dispatch(startLevel(parseInt(x), 0));
+              dispatch(startLevel(x, lives));
               setModal("");
             }}
           >

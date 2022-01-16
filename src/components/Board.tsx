@@ -59,7 +59,9 @@ const Board: FC = () => {
       {modal && (
         <Modal>
           {modal === "choose_player" && <ChoosePlayer setModal={setModal} />}
-          {modal === "choose_level" && <ChooseLevel setModal={setModal} />}
+          {modal === "choose_level" && (
+            <ChooseLevel setModal={setModal} lives={lives} />
+          )}
           {modal === "crossed_level" && <CrossedLevel setModal={setModal} />}
           {modal === "uncrossed_level" && (
             <UncrossedLevel setModal={setModal} />

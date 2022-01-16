@@ -1,3 +1,7 @@
+import { useDispatch } from "react-redux";
+import { startingLevel } from "../../game.config";
+import { changeLives, startLevel } from "../../store/actions";
+
 import styles from "./EndLevel.module.scss";
 
 const GameOver = ({
@@ -5,6 +9,7 @@ const GameOver = ({
 }: {
   setModal: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const dispatch = useDispatch();
   return (
     <div className={styles.endlevel}>
       <h3>Game Over</h3>
@@ -12,6 +17,7 @@ const GameOver = ({
       <div>
         <button
           onClick={() => {
+            dispatch(changeLives(0));
             setModal("choose_player");
           }}
         >
@@ -19,7 +25,8 @@ const GameOver = ({
         </button>
         <button
           onClick={() => {
-            setModal("choose_level");
+            dispatch(startLevel(startingLevel, 0));
+            setModal("");
           }}
         >
           Yes

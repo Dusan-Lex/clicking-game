@@ -5,7 +5,7 @@ export const GENERATE_POSSIBLE_FIELDS = "GENERATE_POSSIBLE_FIELDS";
 export const START_LEVEL = "START_LEVEL";
 export const SET_TIMER = "SET_TIMER";
 export const ADD_TIMESCORE = "ADD_TIMESCORE";
-
+export const CHANGE_LIVES = "CHANGE_LIVES";
 export const ADD_PLAYER = "ADD_PLAYER";
 export const CHANGE_PLAYER = "CHANGE_PLAYER";
 
@@ -37,6 +37,10 @@ export type ActionTypes =
   | {
       type: typeof CHANGE_PLAYER;
       payload: { name: string; level: number };
+    }
+  | {
+      type: typeof CHANGE_LIVES;
+      payload: number;
     };
 
 export const generateLevel = (field: Field, level: number): ActionTypes => ({
@@ -72,4 +76,9 @@ export const addPlayer = (name: string): ActionTypes => ({
 export const changePlayer = (name: string, level: number): ActionTypes => ({
   type: CHANGE_PLAYER,
   payload: { name: name, level: level },
+});
+
+export const changeLives = (lives: number): ActionTypes => ({
+  type: CHANGE_LIVES,
+  payload: lives,
 });

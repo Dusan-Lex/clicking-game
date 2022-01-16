@@ -5,6 +5,7 @@ import {
   ActionTypes,
   ADD_PLAYER,
   ADD_TIMESCORE,
+  CHANGE_LIVES,
   CHANGE_PLAYER,
   GENERATE_LEVEL,
   GENERATE_POSSIBLE_FIELDS,
@@ -14,13 +15,14 @@ import {
 import { Store } from "./types";
 
 import { generateInitialLevelsScores } from "../utils/utils";
+import { startingLevel } from "../game.config";
 
 export function gameReducer(
   state: Store = {
     clickedFields: [],
     possibleFields: [],
     generatedFields: [],
-    level: 1,
+    level: startingLevel,
     lives: 0,
     timer: 0,
     playerName: "",
@@ -81,13 +83,13 @@ export function gameReducer(
         clickedFields: [],
         possibleFields: [],
         generatedFields: [],
-        level: 1,
+        level: startingLevel,
         lives: 0,
         timer: 0,
         playerName: action.payload,
         allStats: {
           ...state.allStats,
-          [action.payload]: generateInitialLevelsScores(),
+          [action.payload]: generateInitialLevelsScores(startingLevel),
         },
       };
     case CHANGE_PLAYER:
@@ -100,6 +102,15 @@ export function gameReducer(
         generatedFields: [],
         lives: 0,
         timer: 0,
+      };
+    case CHANGE_LIVES:
+      return {
+        ...state,
+        clickedFields: [],
+        possibleFields: [],
+        generatedFields: [],
+        timer: 0,
+        lives: action.payload,
       };
     default:
       return state;
