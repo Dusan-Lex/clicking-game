@@ -1,3 +1,4 @@
+import styles from "./EndLevel.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { startLevel } from "../../store/actions";
 
@@ -14,8 +15,8 @@ const UncrossedLevel = ({
   const remainingLives = lives - (level + 1 - clickedFields.length);
   const dispatch = useDispatch();
   return (
-    <div>
-      <h3>You haven't completed level: {level} but you still have lives </h3>
+    <div className={styles.endlevel}>
+      <h3>You haven't completed level {level} but you still have lives.</h3>
       <p>Do you want to play this level again?</p>
       <div>
         <button

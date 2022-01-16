@@ -1,3 +1,4 @@
+import styles from "./Choose.module.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPlayer } from "../../store/actions";
@@ -12,7 +13,7 @@ const ChoosePlayer = ({
   const players = useSelector((state: Store) => Object.keys(state.allStats));
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className={styles.choose}>
       {players.length !== 0 && (
         <>
           <h3>Click to choose player</h3>
@@ -35,9 +36,11 @@ const ChoosePlayer = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(addPlayer(name));
-          setModal("");
-          setName("");
+          if (name.trim()) {
+            dispatch(addPlayer(name));
+            setModal("");
+            setName("");
+          }
         }}
       >
         <input

@@ -12,8 +12,10 @@ export interface ModalOverlayProps {
 
 const ModalOverlay = ({ children }: ModalOverlayProps) => {
   return (
-    <div className={classes.modal}>
-      <div className={classes.content}>{children}</div>
+    <div className={classes.modalbox}>
+      <div className={classes.modal}>
+        <div className={classes.content}>{children}</div>
+      </div>
     </div>
   );
 };

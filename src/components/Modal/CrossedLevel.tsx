@@ -1,3 +1,4 @@
+import styles from "./EndLevel.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { addTimescore, startLevel } from "../../store/actions";
 
@@ -14,8 +15,8 @@ const CrossedLevel = ({
 
   const dispatch = useDispatch();
   return (
-    <div>
-      <h3>You have completed level: {level}</h3>
+    <div className={styles.endlevel}>
+      <h3>You have completed level {level} .</h3>
       <p>Do you want to play next level?</p>
       <div>
         <button

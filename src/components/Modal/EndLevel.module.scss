@@ -1,0 +1,37 @@
+.endlevel {
+  h3 {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.5rem;
+    }
+  }
+  p {
+    font-size: 1.3rem;
+    margin: 1rem;
+  }
+  div {
+    margin: auto;
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+    button {
+      font-size: 1.2rem;
+
+      padding: 0.5rem 2rem;
+      background-color: grey;
+      color: white;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.1s;
+      &:hover {
+        background-color: rgb(54, 53, 53);
+      }
+    }
+    @media screen and (max-width: 350px) {
+      width: 12rem;
+    }
+  }
+}

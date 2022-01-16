@@ -1,3 +1,4 @@
+import styles from "./Choose.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { startLevel } from "../../store/actions";
 
@@ -16,7 +17,7 @@ const ChooseLevel = ({
   });
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className={styles.choose}>
       <h3>Choose level:</h3>
       <ul>
         {playerLevels.map((x) => (
