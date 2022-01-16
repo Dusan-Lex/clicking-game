@@ -7,14 +7,12 @@ import Timer from "./Timer";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Field, Store } from "../store/types";
-import {
-  addTimescore,
-  generateLevel,
-  generatePossibleFields,
-  startLevel,
-} from "../store/actions";
+import { generateLevel, generatePossibleFields } from "../store/actions";
 import ChoosePlayer from "./Modal/ChoosePlayer";
 import ChooseLevel from "./Modal/ChooseLevel";
+import CrossedLevel from "./Modal/CrossedLevel";
+import UncrossedLevel from "./Modal/UncrossedLevel";
+import GameOver from "./Modal/GameOver";
 
 const Board: FC = () => {
   const generatedFields = useSelector((state: Store) => state.generatedFields);
@@ -33,25 +31,17 @@ const Board: FC = () => {
     if (clickedFields.length !== 0 && possibleFields.length === 0) {
       setStartCount(false);
       if (clickedFields.length === level + 1) {
-        dispatch(addTimescore(playerName, level));
-        dispatch(startLevel(level + 1, lives + 1));
+        setModal("crossed_level");
       } else {
         const remainingLives = lives - (level + 1 - clickedFields.length);
         if (remainingLives > 0) {
-          dispatch(startLevel(level, remainingLives));
+          setModal("uncrossed_level");
         } else {
-          dispatch(startLevel(1, 0));
+          setModal("game_over");
         }
       }
     }
-  }, [
-    possibleFields,
-    level,
-    dispatch,
-    lives,
-    clickedFields.length,
-    playerName,
-  ]);
+  }, [possibleFields.length, level, lives, clickedFields.length]);
 
   const onClickHandler = (field: Field) => {
     if (clickedFields.length === 0) {
@@ -70,6 +60,11 @@ const Board: FC = () => {
         <Modal>
           {modal === "choose_player" && <ChoosePlayer setModal={setModal} />}
           {modal === "choose_level" && <ChooseLevel setModal={setModal} />}
+          {modal === "crossed_level" && <CrossedLevel setModal={setModal} />}
+          {modal === "uncrossed_level" && (
+            <UncrossedLevel setModal={setModal} />
+          )}
+          {modal === "game_over" && <GameOver setModal={setModal} />}
         </Modal>
       )}
       <div className={styles.board}>

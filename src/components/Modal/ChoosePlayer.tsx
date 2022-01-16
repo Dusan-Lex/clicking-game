@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPlayer, changePlayer } from "../../store/actions";
+import { addPlayer } from "../../store/actions";
 import { Store } from "../../store/types";
 
 const ChoosePlayer = ({
@@ -22,7 +22,6 @@ const ChoosePlayer = ({
                 key={i}
                 onClick={() => {
                   setModal("choose_level");
-                  //   dispatch(changePlayer(player, 7));
                 }}
               >
                 {player}
