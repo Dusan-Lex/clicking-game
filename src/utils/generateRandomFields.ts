@@ -21,7 +21,6 @@ export function generateRandomFields(
       possibleFields[Math.floor(Math.random() * possibleFieldsLength)];
     generatedFields.push(possibleField);
   }
-  console.log(j);
   if (j !== 0) {
     return generateRandomFields(startField, level);
   } else {
