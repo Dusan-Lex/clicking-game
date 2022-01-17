@@ -25,7 +25,6 @@
   height: 684px;
   background-color: rgb(197, 179, 179);
   .bottom {
-    margin-left: 1rem;
     padding: 0.5rem 0;
     position: absolute;
     top: 100%;
@@ -33,6 +32,7 @@
     display: flex;
     justify-content: space-between;
     div {
+      text-align: center;
       width: 6rem;
       @media only screen and (max-width: 450px) {
         font-size: 12px;
@@ -47,5 +47,41 @@
   @media only screen and (max-width: 900px) {
     width: calc(100vw - 2rem);
     height: calc(100vw - 2rem);
+  }
+}
+
+.playerstats {
+  position: relative;
+  margin-left: 1rem;
+  padding: 1rem;
+  width: 684px;
+  background-color: rgba(128, 128, 128, 0.2);
+  overflow-y: auto;
+
+  .change {
+    position: absolute;
+    font-size: 1rem;
+    right: 1rem;
+    top: 0.4rem;
+
+    padding: 0.5rem;
+    background-color: grey;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.1s;
+    &:hover {
+      background-color: rgb(54, 53, 53);
+    }
+  }
+  @media only screen and (max-width: 1400px) {
+    width: calc(50vw - 1rem);
+    height: auto;
+  }
+  @media only screen and (max-width: 900px) {
+    width: calc(100vw - 2rem);
+    margin-left: 0rem;
+    margin-top: 2.5rem;
   }
 }

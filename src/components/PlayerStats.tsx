@@ -11,18 +11,24 @@ const PlayerStats: FC = () => {
   const [showAllTimes, setShowAllTimes] = useState<number>(0);
   playerStats = playerStats.filter((el) => el[1].length !== 0).reverse();
   return (
-    <div className={styles.playerstats}>
+    <>
       <div className={styles.box}>
-        <h5>Player name:</h5>
+        <h5>Player :</h5>
         <p>{playerName}</p>
       </div>
       <div className={styles.box}>
-        <h5>Top Score:</h5>
+        <h5>Top Score :</h5>
         <div className={styles.levelsstats}>
           <div className={styles.levelstats}>
-            <div>Level</div>
-            <div>Time</div>
-            <div>Times</div>
+            <div style={{ fontWeight: 600, color: "rgb(92, 47, 17)" }}>
+              Level
+            </div>
+            <div style={{ fontWeight: 600, color: "rgb(92, 47, 17)" }}>
+              Time
+            </div>
+            <div style={{ fontWeight: 600, color: "rgb(92, 47, 17)" }}>
+              Times
+            </div>
           </div>
           {playerStats.map((levelStats) => (
             <div className={styles.levelstats} key={levelStats.toString()}>
@@ -79,7 +85,7 @@ const PlayerStats: FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,11 @@
 .App {
   font-family: "Poppins", sans-serif;
+  -webkit-tap-highlight-color: transparent;
   h1 {
     text-align: center;
     margin: 1rem;
+    @media only screen and (max-width: 600px) {
+      margin: 0.5rem;
+    }
   }
 }

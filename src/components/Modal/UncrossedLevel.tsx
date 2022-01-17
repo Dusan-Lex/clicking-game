@@ -20,14 +20,16 @@ const UncrossedLevel = ({
     <div className={styles.endlevel}>
       <h3>
         You haven't completed level {level} but you still have {remainingLives}{" "}
-        {`${remainingLives !== 1 ? "lives" : "life"}`}.
+        {`${remainingLives !== 1 ? "lives" : "life"}`}
       </h3>
       <p>Do you want to continue the game?</p>
       <div>
         <button
           onClick={() => {
+            // dispatch(startLevel(startingLevel, 0));
+            // setModal("choose_player");
             dispatch(startLevel(startingLevel, 0));
-            setModal("choose_player");
+            setModal("");
           }}
         >
           No

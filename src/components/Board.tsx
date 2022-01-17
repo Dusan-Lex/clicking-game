@@ -70,6 +70,7 @@ const Board: FC = () => {
           {modal === "game_over" && <GameOver setModal={setModal} />}
         </Modal>
       )}
+
       <div className={styles.board}>
         {Array.from(Array(100).keys()).map((el) => {
           const field = { x: Math.floor(el / 10), y: el % 10 };
@@ -90,7 +91,17 @@ const Board: FC = () => {
           <div>Lives: {lives}</div>
         </div>
       </div>
-      {playerName && <PlayerStats />}
+      <div className={styles.playerstats}>
+        <button
+          className={styles.change}
+          onClick={() => {
+            setModal("choose_player");
+          }}
+        >
+          Change player
+        </button>
+        {playerName && <PlayerStats />}
+      </div>
     </div>
   );
 };

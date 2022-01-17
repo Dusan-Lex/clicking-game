@@ -1,73 +1,53 @@
-.playerstats {
-  margin-left: 1rem;
-  padding: 1rem;
-  width: 684px;
-  background-color: rgba(128, 128, 128, 0.2);
-  overflow-y: auto;
-  .box {
-    margin-bottom: 1rem;
+.box {
+  margin-bottom: 1rem;
 
-    p {
-      font-size: 1.2rem;
-    }
-    h5 {
-      font-size: 1.3rem;
-      color: rgb(202, 18, 18);
-      border-bottom: 1px solid rgb(26, 25, 25);
-    }
-    .levelsstats {
-      margin: 0.5rem 0;
+  p {
+    font-size: 1.2rem;
+  }
+  h5 {
+    font-size: 1.3rem;
+    color: rgb(202, 18, 18);
+    border-bottom: 1px solid rgb(26, 25, 25);
+  }
+  .levelsstats {
+    margin: 0.5rem 0;
 
-      .levelstats {
+    .levelstats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 1.9rem;
+      background-color: rgb(214, 210, 206);
+      margin: 0.2rem 0;
+
+      div {
+        width: 30%;
+        text-align: center;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        height: 1.9rem;
-        background-color: rgb(214, 210, 206);
-        margin: 0.2rem 0;
+        svg {
+          margin-left: 0.5rem;
+          cursor: pointer;
+        }
 
-        div {
-          width: 30%;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        &:last-child {
+          width: 25%;
+        }
+        .popup {
+          position: absolute;
+          padding: 1rem;
+          background-color: rgb(104, 103, 102);
+          width: 11rem;
+          list-style: none;
+          color: white;
           svg {
-            margin-left: 0.5rem;
-            cursor: pointer;
-          }
-
-          &:last-child {
-            width: 25%;
-          }
-          .popup {
             position: absolute;
-            padding: 1rem;
-            background-color: rgb(104, 103, 102);
-            width: 11rem;
-            list-style: none;
-            color: white;
-            svg {
-              position: absolute;
-              top: 0.5rem;
-              right: 0.5rem;
-            }
+            top: 0.5rem;
+            right: 0.5rem;
           }
         }
       }
     }
-  }
-}
-@media only screen and (max-width: 1400px) {
-  .playerstats {
-    width: calc(50vw - 1rem);
-    height: auto;
-  }
-}
-@media only screen and (max-width: 900px) {
-  .playerstats {
-    width: calc(100vw - 2rem);
-    margin-left: 0rem;
-    margin-top: 2.5rem;
   }
 }
