@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
 import classes from "./Modal.module.scss";
 
@@ -25,6 +25,12 @@ export interface ModalProps {
 }
 
 const Modal = ({ children }: ModalProps) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
