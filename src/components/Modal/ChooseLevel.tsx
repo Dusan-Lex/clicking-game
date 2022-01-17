@@ -27,6 +27,26 @@ const ChooseLevel = ({
   const dispatch = useDispatch();
   return (
     <div className={styles.choose}>
+      <div
+        className={styles.back}
+        onClick={() => {
+          setModal("choose_player");
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#a81919"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M19 12H6M12 5l-7 7 7 7" />
+        </svg>
+      </div>
       <h3>Choose level:</h3>
       <ul>
         {playerLevels.map((x) => (

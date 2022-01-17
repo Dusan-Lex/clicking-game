@@ -13,13 +13,14 @@ import ChooseLevel from "./Modal/ChooseLevel";
 import CrossedLevel from "./Modal/CrossedLevel";
 import UncrossedLevel from "./Modal/UncrossedLevel";
 import GameOver from "./Modal/GameOver";
+import PlayerStats from "./PlayerStats";
 
 const Board: FC = () => {
   const generatedFields = useSelector((state: Store) => state.generatedFields);
   const clickedFields = useSelector((state: Store) => state.clickedFields);
   const possibleFields = useSelector((state: Store) => state.possibleFields);
-  const playerName = useSelector((state: Store) => state.playerName);
   const level = useSelector((state: Store) => state.level);
+  const playerName = useSelector((state: Store) => state.playerName);
   const lives = useSelector((state: Store) => state.lives);
   const dispatch = useDispatch();
 
@@ -89,9 +90,7 @@ const Board: FC = () => {
           <div>Lives: {lives}</div>
         </div>
       </div>
-      <div className={styles.gamestats}>
-        <div>Player name: {playerName}</div>
-      </div>
+      {playerName && <PlayerStats />}
     </div>
   );
 };

@@ -36,7 +36,7 @@ export type ActionTypes =
     }
   | {
       type: typeof CHANGE_PLAYER;
-      payload: { name: string; level: number };
+      payload: string;
     }
   | {
       type: typeof CHANGE_LIVES;
@@ -73,9 +73,9 @@ export const addPlayer = (name: string): ActionTypes => ({
   payload: name,
 });
 
-export const changePlayer = (name: string, level: number): ActionTypes => ({
+export const changePlayer = (name: string): ActionTypes => ({
   type: CHANGE_PLAYER,
-  payload: { name: name, level: level },
+  payload: name,
 });
 
 export const changeLives = (lives: number): ActionTypes => ({

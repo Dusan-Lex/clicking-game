@@ -1,7 +1,7 @@
 import styles from "./Choose.module.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPlayer } from "../../store/actions";
+import { addPlayer, changePlayer } from "../../store/actions";
 import { Store } from "../../store/types";
 
 const ChoosePlayer = ({
@@ -22,6 +22,7 @@ const ChoosePlayer = ({
               <li
                 key={i}
                 onClick={() => {
+                  dispatch(changePlayer(player));
                   setModal("choose_level");
                 }}
               >

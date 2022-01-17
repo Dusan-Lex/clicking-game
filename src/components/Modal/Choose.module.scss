@@ -1,4 +1,10 @@
 .choose {
+  .back {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    cursor: pointer;
+  }
   h3 {
     margin-top: 1rem;
     font-size: 1.6rem;

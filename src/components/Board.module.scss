@@ -3,11 +3,14 @@
   max-width: 1400px;
   margin: auto;
   padding: 0 1rem;
-}
+  height: 684px;
+  @media only screen and (max-width: 1400px) {
+    height: calc(50vw - 1rem);
+  }
 
-@media only screen and (max-width: 900px) {
-  .container {
+  @media only screen and (max-width: 900px) {
     flex-direction: column;
+    height: auto;
   }
 }
 
@@ -31,47 +34,18 @@
     justify-content: space-between;
     div {
       width: 6rem;
+      @media only screen and (max-width: 450px) {
+        font-size: 12px;
+        font-weight: 500;
+      }
     }
   }
-}
-
-@media only screen and (max-width: 1400px) {
-  .board {
+  @media only screen and (max-width: 1400px) {
     width: calc(50vw - 1rem);
     height: calc(50vw - 1rem);
   }
-}
-@media only screen and (max-width: 900px) {
-  .board {
+  @media only screen and (max-width: 900px) {
     width: calc(100vw - 2rem);
     height: calc(100vw - 2rem);
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .board .bottom div {
-    font-size: 12px;
-    font-weight: 500;
-  }
-}
-
-.gamestats {
-  margin-left: 1rem;
-  padding: 1rem;
-  width: 684px;
-  background-color: rgba(128, 128, 128, 0.2);
-}
-@media only screen and (max-width: 1400px) {
-  .gamestats {
-    width: calc(50vw - 1rem);
-    height: calc(50vw - 1rem);
-  }
-}
-@media only screen and (max-width: 900px) {
-  .gamestats {
-    width: calc(100vw - 2rem);
-    height: calc(100vw - 2rem);
-    margin-left: 0rem;
-    margin-top: 2.5rem;
   }
 }

@@ -95,8 +95,7 @@ export function gameReducer(
     case CHANGE_PLAYER:
       return {
         ...state,
-        playerName: action.payload.name,
-        level: action.payload.level,
+        playerName: action.payload,
         clickedFields: [],
         possibleFields: [],
         generatedFields: [],

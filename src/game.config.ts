@@ -1,1 +1,1 @@
-export const startingLevel = 2;
+export const startingLevel = 1;
