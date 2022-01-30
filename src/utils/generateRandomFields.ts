@@ -9,19 +9,18 @@ export function generateRandomFields(
 ): Field[] {
   const generatedFields = [startField];
 
-  let j = 0;
+  let isGenerated = true;
   for (let i = 1; i <= level; i++) {
     const possibleFields = calculatePossibleFields(generatedFields);
     const possibleFieldsLength = possibleFields.length;
     if (possibleFieldsLength === 0) {
-      j = i;
+      isGenerated = false;
       break;
     }
-    const possibleField =
-      possibleFields[Math.floor(Math.random() * possibleFieldsLength)];
+    const possibleField = possibleFields[Math.floor(Math.random() * possibleFieldsLength)];
     generatedFields.push(possibleField);
   }
-  if (j !== 0) {
+  if (!isGenerated) {
     return generateRandomFields(startField, level);
   } else {
     return generatedFields;

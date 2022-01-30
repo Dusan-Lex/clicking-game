@@ -1,11 +1,11 @@
 import { Field } from "../store/types";
 import { isField } from "./isField";
 
-export function calculatePossibleFields(fields: Field[]): Field[] {
-  if (fields.length === 0) {
-    return fields;
+export function calculatePossibleFields(clickedFields: Field[]): Field[] {
+  if (clickedFields.length === 0) {
+    return clickedFields;
   }
-  const lastField = fields[fields.length - 1];
+  const lastField = clickedFields[clickedFields.length - 1];
   const possFields = [
     { x: lastField.x - 2, y: lastField.y - 2 },
     { x: lastField.x - 3, y: lastField.y },
@@ -17,6 +17,5 @@ export function calculatePossibleFields(fields: Field[]): Field[] {
     { x: lastField.x + 2, y: lastField.y + 2 },
   ];
   return possFields
-    .filter((el) => el.x >= 0 && el.x <= 9 && el.y >= 0 && el.y <= 9)
-    .filter((x) => !isField(fields, x));
+    .filter((field) => field.x >= 0 && field.x <= 9 && field.y >= 0 && field.y <= 9 && !isField(clickedFields,field))
 }

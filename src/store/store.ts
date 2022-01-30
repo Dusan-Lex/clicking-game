@@ -1,6 +1,5 @@
 import { createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
-// import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 import { gameReducer } from "./reducers";
 
